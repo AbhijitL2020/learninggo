@@ -26,7 +26,7 @@ func cat(r *bufio.Reader) {
 			break
 		}
 		if *numberFlag {
-			fmt.Fprintf(os.Stdout, "%5d  %s", i, buf)
+			fmt.Fprintf(os.Stdout, "%5d  %s", i, buf) // Such nice touch- using StdErr/Stdout/Stdin
 			i++
 		} else {
 			fmt.Fprintf(os.Stdout, "%s", buf)
@@ -40,7 +40,8 @@ func main() {
 	if flag.NArg() == 0 { // Number of Arguments. I think these are non-flag arguments only
 		cat(bufio.NewReader(os.Stdin)) // Nice touch! It reads Stdin. Echoes of C, Unix heritage!
 	}
-	for i := 0; i < flag.NArg(); i++ {
+	for i := 0; i < flag.NArg(); i++ { // A package named flag handling arguments also :)
+
 		f, e := os.Open(flag.Arg(i))
 		if e != nil {
 			fmt.Fprintf(os.Stderr, "%s: error reading from %s: %s\n",
