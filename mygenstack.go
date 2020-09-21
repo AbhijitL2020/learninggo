@@ -57,12 +57,12 @@ func (s *Stack) Push(v interface{}) bool {
 			return false
 		}
 	}
-LabelDoomPush:
+LabelDoomPush: // This is horrible code! You should have just let the code fall through!!
 	if s.stackPtr < STACKFULL {
 		s.stackPtr++
 		switch s.stackType {
 		case 0:
-			s.stackIntData[s.stackPtr] = v.(int)
+			s.stackIntData[s.stackPtr] = v.(int) // Does this work?! :)
 		case 1:
 			s.stackStrData[s.stackPtr] = v.(string)
 		}
@@ -74,7 +74,7 @@ LabelDoomPush:
 // Method Pop will return the value on the top of the stack.
 // Except when Stack is Empty, in which case it will return false for the ok parameter
 func (s *Stack) Pop() (interface{}, bool) {
-	defer s.decrStackPtr()
+	defer s.decrStackPtr() // Comes handy, isn't it?! But it still is kind of indirect. :(
 	if s.stackPtr > STACKEMPTY {
 		switch s.stackType {
 		case 0:
