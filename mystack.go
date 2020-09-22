@@ -2,6 +2,8 @@
 // This is the package for it.
 package mystack
 
+import "strconv"
+
 const (
 	STACKFULL  = 10
 	STACKEMPTY = -1
@@ -37,4 +39,14 @@ func (s *Stack) Pop() (int, bool) {
 		return v, true
 	}
 	return 0, false // This is that comma ok format of return value, but it does not allow me to send _
+}
+
+// Method PrintStack will print the contents of the stack in the order that it will be popped
+// so it will be an exported method, and it will return a string, that can be printed with a %s
+func (s *Stack) PrintStack() string {
+	strOut := ""
+	for i := s.stackPtr; i > STACKEMPTY; i-- {
+		strOut += "[" + strconv.Itoa(i) + ":" + strconv.Atoi(s.stackData[i]) + "]"
+	}
+	return strOut
 }
